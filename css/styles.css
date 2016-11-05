@@ -1,0 +1,52 @@
+#bandName{
+    position: absolute;
+    top: 28px;
+    right: 200px;
+    left: 112px;
+    width: 200px;
+    font-size: initial;
+}
+
+#songName{
+    position: absolute;
+    top: 8px;
+    right: 200px;
+    left: 112px;
+    width: 269px;
+    font-size: small;
+    align-content: center;
+}
+
+body {
+	min-width: 400px;
+	min-height: 38px;
+	overflow-x: hidden;
+}
+
+#playImage {
+    margin: 0px;
+    border: 1px;
+    width: 50px;
+    position: fixed;
+    height: 50px;
+    left: 364px;
+    top: 2px;
+}
+
+#radioEksen{
+    position: absolute;
+    top: 2px;
+    right: 200px;
+    left: 1px;
+    width: 50px;
+    height: 50px;
+}
+
+#rockFM{
+    position: absolute;
+    top: 2px;
+    right: 200px;
+    left: 51px;
+    width: 50px;
+    height: 50px;
+}
