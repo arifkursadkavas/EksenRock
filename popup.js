@@ -104,21 +104,12 @@ function setRadioSelection(audioElement, radio){
 		audioElement.play();
 }
 function getCurrentSong () {
-	var url = "http://live.radioeksen.com/";
+	var url = "http://www.radioeksen.com/Json/GetCurrentSong";
 
 	var callback = function (data) {
-	    var songInfo = $("#playingSong", $(data)).text().replace(/(\r\n|\n|\r)/gm,"");
+        $("#songName").text(data.Artist);
+        $("#bandName").text(data.TrackName);
 
-	    if(songInfo.indexOf("Sonraki") > 0)
-	    {
-	    	$("#songName").text(songInfo.slice(0, songInfo.indexOf("Sonraki")).split("-")[1].trim());
-		    $("#bandName").text(songInfo.slice(0, songInfo.indexOf("Sonraki")).split("-")[0].trim());
-	    }
-	    else
-	    {
-	    	$("#songName").text(songInfo.split("-")[1].trim());
-		    $("#bandName").text(songInfo.split("-")[0].trim());
-	    }	
 	};
 	$.get(url, null, callback, null);
 };
