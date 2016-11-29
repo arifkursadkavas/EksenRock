@@ -1,9 +1,9 @@
-#bandName{
+#bandName {
     position: absolute;
     top: 28px;
     right: 200px;
     left: 112px;
-    width: 200px;
+    width: 184px;
     font-size: initial;
 }
 
@@ -12,7 +12,18 @@
     top: 8px;
     right: 200px;
     left: 112px;
-    width: 269px;
+    width: 184px;
+    font-size: small;
+    align-content: center;
+}
+
+#albumCover {
+    position: absolute;
+    top: 4px;
+    right: 0px;
+    left: 295px;
+    width: 58px;
+    height: 47px;
     font-size: small;
     align-content: center;
 }

@@ -105,12 +105,21 @@ function setRadioSelection(audioElement, radio){
 }
 function getCurrentSong () {
 	var url = "http://www.radioeksen.com/Json/GetCurrentSong";
+    
+
+    var setCover = function(data){
+        $("#albumCover").attr('src', data.track.album.image[0]["#text"]);
+    }
 
 	var callback = function (data) {
-        $("#songName").text(data.Artist);
-        $("#bandName").text(data.TrackName);
-
-	};
+        $("#songName").html(data.TrackName);
+        $("#bandName").html(data.Artist);
+        
+        var coverUrl = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=edc27502d7ed8bc36de8aa566c17214d&artist="+data.Artist+"&track="+data.TrackName+"&format=json";
+        
+        $.post(coverUrl,null,setCover,null);
+        
+    };
 	$.get(url, null, callback, null);
 };
 
