@@ -94,6 +94,7 @@ function setRadioSelection(audioElement, radio){
 				}
 			});
 			$("body").css("background-color","#B63440");
+            $("#albumCover").attr('src', "img/rock.png");
 			break;
 		}
 	}
@@ -108,7 +109,12 @@ function getCurrentSong () {
     
 
     var setCover = function(data){
-        $("#albumCover").attr('src', data.track.album.image[0]["#text"]);
+        if(data!= null && data.track != null && data.track.album!= null&&data.track.album.image[1]["#text"] != null){
+            $("#albumCover").attr('src', data.track.album.image[1]["#text"]);
+        }
+        else{
+            $("#albumCover").attr('src', "img/eksen.png");
+        }            
     }
 
 	var callback = function (data) {

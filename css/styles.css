@@ -1,37 +1,37 @@
 #bandName {
     position: absolute;
-    top: 28px;
+    top: 75px;
     right: 200px;
-    left: 112px;
-    width: 184px;
+    left: 11px;
+    width: 250px;
     font-size: initial;
 }
 
-#songName{
+#songName {
     position: absolute;
-    top: 8px;
-    right: 200px;
-    left: 112px;
+    top: 59px;
+    right: 140px;
+    left: 10px;
     width: 184px;
-    font-size: small;
+    font-size: 10px;
     align-content: center;
 }
 
 #albumCover {
     position: absolute;
-    top: 4px;
-    right: 0px;
-    left: 295px;
-    width: 58px;
-    height: 47px;
+    top: 103px;
+    right: 53px;
+    left: 54px;
+    width: 150px;
+    height: 150px;
     font-size: small;
     align-content: center;
 }
 
 body {
-	min-width: 400px;
-	min-height: 38px;
-	overflow-x: hidden;
+    min-width: 234px;
+    min-height: 248px;
+    overflow-x: hidden;
 }
 
 #playImage {
@@ -40,24 +40,24 @@ body {
     width: 50px;
     position: fixed;
     height: 50px;
-    left: 364px;
+    left: 197px;
     top: 2px;
 }
 
-#radioEksen{
+#radioEksen {
     position: absolute;
     top: 2px;
-    right: 200px;
-    left: 1px;
+    right: 211px;
+    left: 53px;
     width: 50px;
     height: 50px;
 }
 
-#rockFM{
+#rockFM {
     position: absolute;
     top: 2px;
     right: 200px;
-    left: 51px;
+    left: 2px;
     width: 50px;
     height: 50px;
 }
