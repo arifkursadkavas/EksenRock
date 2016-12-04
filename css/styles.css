@@ -1,63 +1,113 @@
 #bandName {
     position: absolute;
-    top: 75px;
-    right: 200px;
-    left: 11px;
-    width: 250px;
-    font-size: initial;
+    top: 216px;
+    width: 234px;
+    font-size: 10px;
+    text-align: center;
 }
 
 #songName {
     position: absolute;
-    top: 59px;
-    right: 140px;
-    left: 10px;
-    width: 184px;
+    top: 205px;
+    width: 234px;
     font-size: 10px;
-    align-content: center;
+    text-align: center;
 }
 
 #albumCover {
     position: absolute;
-    top: 103px;
+    top: 40px;
     right: 53px;
-    left: 54px;
+    left: 46px;
     width: 150px;
     height: 150px;
     font-size: small;
+    border-radius: 25px;
     align-content: center;
 }
 
 body {
     min-width: 234px;
-    min-height: 248px;
+    min-height: 216px;
     overflow-x: hidden;
 }
 
 #playImage {
     margin: 0px;
     border: 1px;
-    width: 50px;
+    width: 35px;
+    max-height: 35px;
     position: fixed;
     height: 50px;
-    left: 197px;
+    left: 210px;
     top: 2px;
 }
 
 #radioEksen {
     position: absolute;
-    top: 2px;
-    right: 211px;
-    left: 53px;
-    width: 50px;
-    height: 50px;
+    top: 48px;
+    right: 184px;
+    left: 210px;
+    width: 35px;
+    height: 35px;
 }
 
 #rockFM {
     position: absolute;
-    top: 2px;
+    top: 89px;
     right: 200px;
-    left: 2px;
-    width: 50px;
-    height: 50px;
+    left: 210px;
+    width: 35px;
+    height: 35px;
+}
+
+#speaker {
+    position: absolute;
+    top: 10px;
+    right: 132px;
+    left: 4px;
+    width: 20px;
+    height: 20px;
+}
+
+#mute {
+    position: absolute;
+    top: 22px;
+    right: 132px;
+    left: 16px;
+    width: 10px;
+    height: 10px;
+} 
+
+#volume {
+    position: absolute;
+    left: 31px;
+    margin: 0 auto;
+    height: 15px;
+    top: 15px;
+    width: 168px;
+    background: url(../img/volume-empty.png) no-repeat left top;
+    border: none;
+    outline: none;
+}
+
+#volume .ui-slider-range-min {
+    height:15px;
+    width: 140px;
+    position: absolute;
+    background: url('../img/volume-full.png') no-repeat left top;
+    border: none;
+    outline: none;
+}
+
+#volume .ui-slider-handle {
+    width: 17px;
+    height: 18px;
+    background: url(../img/volume-knob.png) no-repeat center center;
+    position: absolute;
+    top: -3px;
+    margin-left: -6px;
+    cursor: pointer;
+    outline: none;
+    border: none;
 }

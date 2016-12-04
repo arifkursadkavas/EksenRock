@@ -5,7 +5,29 @@ var Radio = {
 		
 		var bgPage = chrome.extension.getBackgroundPage();
 		var audioElement = bgPage.player;
-	    audioElement.volume = 0.6;
+        
+        $("#volume").slider({
+            min: 0,
+            max: 100,
+            value: audioElement.volume,
+            range: "min",
+            animate: false,
+            slide: function(event, ui) {
+                setVolume((ui.value) / 100, true);
+            }
+        });
+        
+        var volume = localStorage.getItem('volume');
+        
+        if(volume == null || volume == 0){
+            volume  = 0.5;    
+        }	    
+        
+        localStorage.setItem('volume',volume)
+        setVolume(volume,true);
+        
+        setUISlider(volume);
+       
 
 		var playingRadio = localStorage.getItem('playingRadio');
 
@@ -56,7 +78,24 @@ var Radio = {
 				audioElement.play();
 				localStorage.setItem('isPlaying', "true");	
 			}
-		});	
+		});
+        
+        $("#speaker").click(function(){
+            storedVolume = localStorage.getItem('volume');
+			if(storedVolume != 0){
+                setVolume(0,true);
+                setUISlider(0);
+                localStorage.setItem('preMuteVolume',storedVolume);
+                $("#mute").show();
+            }
+            else{
+                var preMuteVolume = localStorage.getItem('preMuteVolume');
+                setVolume(preMuteVolume,true);
+                setUISlider(preMuteVolume);
+                $("#mute").hide();
+            }
+						
+		});     
 	}
 };
 
@@ -104,6 +143,7 @@ function setRadioSelection(audioElement, radio){
 	if(isPlaying == "true")
 		audioElement.play();
 }
+
 function getCurrentSong () {
 	var url = "http://www.radioeksen.com/Json/GetCurrentSong";
     
@@ -148,6 +188,22 @@ function onPopSetUI(){
 		getCurrentSong ();
 	}
 };
+
+function setVolume(myVolume,store) {
+    var bgPage = chrome.extension.getBackgroundPage();
+	var audioElement = bgPage.player;
+    audioElement.volume = myVolume;
+    if(store === true){
+        localStorage.setItem('volume',myVolume)
+    }
+    if(myVolume != 0){
+        $("#mute").hide();
+    }
+}
+
+function setUISlider(value){
+    $("#volume").slider('value', value*100);
+}
 
 document.addEventListener('DOMContentLoaded', function () {
 	Radio.onLoad();
