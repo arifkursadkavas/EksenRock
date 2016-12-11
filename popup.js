@@ -149,8 +149,8 @@ function getCurrentSong () {
     
 
     var setCover = function(data){
-        if(data!= null && data.track != null && data.track.album!= null&&data.track.album.image[1]["#text"] != null){
-            $("#albumCover").attr('src', data.track.album.image[1]["#text"]);
+        if(data!= null && data.track != null && data.track.album!= null&&data.track.album.image[data.track.album.image.length - 1]["#text"] != null){
+            $("#albumCover").attr('src', data.track.album.image[data.track.album.image.length - 1]["#text"]);
         }
         else{
             $("#albumCover").attr('src', "img/eksen.png");

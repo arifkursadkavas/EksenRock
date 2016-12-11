@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Radio Eksen & Rock FM",
   "description": "Radio Eksen & Rock FM Extension",
-  "version": "1.5",
+  "version": "1.7",
   
   "permissions": [
     "http://www.radioeksen.com/"
