@@ -64,7 +64,7 @@ var Radio = {
             }
             $( "#radioEksen" ).fadeTo( 0, 0.33 );
             $( "#rockFM" ).fadeTo( 0, 0.33 );
-            $( "body" ).css( "background-color", "#B63440" );
+            $( "body" ).css( "background-color", "#FAFB00" );
         }
 
         $( "#radioEksen" ).click( function ()
@@ -182,7 +182,7 @@ function setRadioSelection( audioElement, radio )
                     "38": "img/cult_icon.png"
                 }
             });
-            $( "body" ).css( "background-color", "#DF4A2E" );
+            $( "body" ).css( "background-color", "#FAFB00" );
             break;
 
     }
@@ -250,12 +250,20 @@ function onPopSetUI()
     if ( playingRadio == "rock" )
     {
         $( "#radioEksen" ).fadeTo( 0, 0.33 );
+        $( "#cultRecords" ).fadeTo( 0, 0.33 );
         clearSongInfo();
     }
     else if ( playingRadio == "eksen" )
     {
         $( "#rock" ).fadeTo( 0, 0.33 );
+        $( "#cultRecords" ).fadeTo( 0, 0.33 );
         setEksenCurrentSong();
+    }
+    else if ( playingRadio == "cultRecords" )
+    {
+        $( "#rock" ).fadeTo( 0, 0.33 );
+        $( "#radioEksen" ).fadeTo( 0, 0.33 );
+        setCultCurrentSong();
     }
 };
 
