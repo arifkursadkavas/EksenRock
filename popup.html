@@ -1,24 +1,26 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <title>Extension's Popup</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-	  <script src="js/jquery-2.1.4.min.js"></script>
-      <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="popup.js"></script>
-  </head>
-  <body>
-  <img id="radioEksen" src="img/eksen.png"/>
-  <img id="rockFM" src="img/rock.png"/>
+</head>
+<body>
+    <div>
+        <img id="radioEksen" src="img/eksen.png" title="Radio Eksen" style="cursor: pointer;"/>
+        <img id="rockFM" src="img/rock.png" title="Rock FM" style="cursor: pointer;"/>
+        <img id="cultRecords" src="img/cult.png" title="Cult Records" style="cursor: pointer;"/>
+    </div>
     <div id="songName"></div>
     <div id="bandName"></div>
-      <img id="albumCover"/>
-      <div>
-        <img id="playImage"/>
-        </audio>
-      <img id="speaker" src="img/speaker.png"></img>
-      <img id="mute" src="img/mute.png" style="display:none"></img>
-      <div id="volume"></div>
+    <img id="albumCover" />
+    <div>
+        <img id="playImage" />
+        <img id="speaker" src="img/speaker.png" />
+        <img id="mute" src="img/mute.png" style="display:none" />
+        <div id="volume"></div>
     </div>
-  </body>
+</body>
 </html>
