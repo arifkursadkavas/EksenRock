@@ -50,6 +50,7 @@ body {
     left: 210px;
     width: 35px;
     height: 35px;
+    border-radius:4px;
 }
 
 #rockFM {
@@ -59,6 +60,17 @@ body {
     left: 210px;
     width: 35px;
     height: 35px;
+    border-radius: 4px;
+}
+
+#cultRecords {
+    position: absolute;
+    top: 130px;
+    right: 200px;
+    left: 210px;
+    width: 35px;
+    height: 35px;
+    border-radius: 4px;
 }
 
 #speaker {
