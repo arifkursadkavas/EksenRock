@@ -17,13 +17,22 @@
 #albumCover {
     position: absolute;
     top: 40px;
-    right: 53px;
-    left: 46px;
-    width: 150px;
-    height: 150px;
+    right: 60px;
+    left: 40px;
+    width: 160px;
+    height: 160px;
     font-size: small;
-    border-radius: 25px;
+    border-radius: 80px;
     align-content: center;
+}
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
 }
 
 body {
@@ -114,7 +123,7 @@ body {
 
 #volume .ui-slider-handle {
     width: 17px;
-    height: 18px;
+    height: 19px;
     background: url(../img/volume-knob.png) no-repeat center center;
     position: absolute;
     top: -3px;

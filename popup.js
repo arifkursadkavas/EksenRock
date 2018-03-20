@@ -85,24 +85,26 @@ var Radio = {
                 setRadioSelection( audioElement, "cultRecords" );
         });
 
-        if ( audioElement.paused )
+        if ( audioElement.paused ) {
             $( "#playImage" ).attr( 'src', 'img/play.png' );
-        else
+            $('#albumCover').css("-webkit-animation","");
+        }
+        else{
             $( "#playImage" ).attr( 'src', 'img/pause.png' );
+            $('#albumCover').css("-webkit-animation","rotation 4s infinite linear");
+        }
 
         $( "#playImage" ).click( function ()
         {
             if ( this.src.indexOf( "pause.png" ) > -1 )
             {
                 $( this ).attr( 'src', 'img/play.png' );
-                audioElement.pause();
-                localStorage.setItem( 'isPlaying', "false" );
+                play(false);
             }
             else
             {
                 $( this ).attr( 'src', 'img/pause.png' );
-                audioElement.play();
-                localStorage.setItem( 'isPlaying', "true" );
+                play(true);
             }
         });
 
@@ -128,6 +130,19 @@ var Radio = {
     }
 };
 
+function play(play){
+    localStorage.setItem( 'isPlaying', play);
+    var bgPage = chrome.extension.getBackgroundPage();
+    var audioElement = bgPage.player;
+    if(play){
+        audioElement.play();
+        $('#albumCover').css("-webkit-animation","rotation 4s infinite linear");
+    } else {
+        audioElement.pause();
+        $('#albumCover').css("-webkit-animation","");
+    }
+}
+
 function setRadioSelection( audioElement, radio )
 {
 
@@ -137,59 +152,59 @@ function setRadioSelection( audioElement, radio )
     {
         case "eksen":
 
-            $( "#rockFM" ).fadeTo( 0, 0.33 );
-            $( "#cultRecords" ).fadeTo( 0, 0.33 );
-            $( "#radioEksen" ).fadeTo( 0, 1 );
-            audioElement.src = "http://eksenwmp.radyotvonline.com:80/;stream.mp3";
-            audioElement.type = "audio/mp3";
-            setEksenCurrentSong();
-            chrome.browserAction.setIcon( {
-                path: {
-                    "19": "img/eksen_icon.png",
-                    "38": "img/eksen_icon.png"
-                }
-            });
-            $( "body" ).css( "background-color", "#FFD800" );
-            break;
+        $( "#rockFM" ).fadeTo( 0, 0.33 );
+        $( "#cultRecords" ).fadeTo( 0, 0.33 );
+        $( "#radioEksen" ).fadeTo( 0, 1 );
+        audioElement.src = "http://eksenwmp.radyotvonline.com:80/;stream.mp3";
+        audioElement.type = "audio/mp3";
+        setEksenCurrentSong();
+        chrome.browserAction.setIcon( {
+            path: {
+                "19": "img/eksen_icon.png",
+                "38": "img/eksen_icon.png"
+            }
+        });
+        $( "body" ).css( "background-color", "#FFD800" );
+        break;
 
         case "rock":
-            $( "#radioEksen" ).fadeTo( 0, 0.33 );
-            $( "#cultRecords" ).fadeTo( 0, 0.33 );
-            $( "#rockFM" ).fadeTo( 0, 1 );
-            audioElement.src = "http://rockfm.rockfm.com.tr:9450/;stream.mp3";
-            audioElement.type = "audio/mp3";
-            clearSongInfo();
-            chrome.browserAction.setIcon( {
-                path: {
-                    "19": "img/rock_icon.png",
-                    "38": "img/rock_icon.png"
-                }
-            });
-            $( "body" ).css( "background-color", "#B63440" );
-            $( "#albumCover" ).attr( 'src', "img/rock.png" );
-            break;
+        $( "#radioEksen" ).fadeTo( 0, 0.33 );
+        $( "#cultRecords" ).fadeTo( 0, 0.33 );
+        $( "#rockFM" ).fadeTo( 0, 1 );
+        audioElement.src = "http://rockfm.rockfm.com.tr:9450/;stream.mp3";
+        audioElement.type = "audio/mp3";
+        clearSongInfo();
+        chrome.browserAction.setIcon( {
+            path: {
+                "19": "img/rock_icon.png",
+                "38": "img/rock_icon.png"
+            }
+        });
+        $( "body" ).css( "background-color", "#B63440" );
+        $( "#albumCover" ).attr( 'src', "img/rock.png" );
+        break;
 
         case "cultRecords":
-            $( "#radioEksen" ).fadeTo( 0, 0.33 );
-            $( "#rockFM" ).fadeTo( 0, 0.33 );
-            $( "#cultRecords" ).fadeTo( 0, 1 );
-            audioElement.src = "https://streaming.radio.co/sefac315e7/listen";
-            audioElement.type = "audio/mpeg";
-            setCultCurrentSong();
-            chrome.browserAction.setIcon( {
-                path: {
-                    "19": "img/cult_icon.png",
-                    "38": "img/cult_icon.png"
-                }
-            });
-            $( "body" ).css( "background-color", "#FAFB00" );
-            break;
+        $( "#radioEksen" ).fadeTo( 0, 0.33 );
+        $( "#rockFM" ).fadeTo( 0, 0.33 );
+        $( "#cultRecords" ).fadeTo( 0, 1 );
+        audioElement.src = "https://streaming.radio.co/sefac315e7/listen";
+        audioElement.type = "audio/mpeg";
+        setCultCurrentSong();
+        chrome.browserAction.setIcon( {
+            path: {
+                "19": "img/cult_icon.png",
+                "38": "img/cult_icon.png"
+            }
+        });
+        $( "body" ).css( "background-color", "#FAFB00" );
+        break;
 
     }
 
     localStorage.setItem( 'playingRadio', radio );
 
-    if ( isPlaying == "true" )
+    if ( isPlaying === 'true' )
         audioElement.play();
 }
 
