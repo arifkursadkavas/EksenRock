@@ -50,6 +50,7 @@ body {
     height: 50px;
     left: 210px;
     top: 2px;
+    cursor: pointer;
 }
 
 #radioEksen {
@@ -89,6 +90,7 @@ body {
     left: 4px;
     width: 20px;
     height: 20px;
+    cursor: pointer;
 }
 
 #mute {
@@ -110,6 +112,7 @@ body {
     background: url(../img/volume-empty.png) no-repeat left top;
     border: none;
     outline: none;
+    cursor: pointer;
 }
 
 #volume .ui-slider-range-min {
@@ -119,6 +122,7 @@ body {
     background: url('../img/volume-full.png') no-repeat left top;
     border: none;
     outline: none;
+    cursor: pointer;
 }
 
 #volume .ui-slider-handle {
@@ -131,4 +135,11 @@ body {
     cursor: pointer;
     outline: none;
     border: none;
+}
+
+#addSong {
+    position: absolute;
+    left: 200px;
+    top: 186px;
+    cursor: pointer;
 }
