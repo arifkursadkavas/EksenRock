@@ -8,7 +8,7 @@ var Constants = {
 
 var Stations = {
 	Eksen: {
-		url: 'http://eksenwmp.radyotvonline.com/;stream.mp3',
+		url: 'http://eksenwmp.radyotvonline.com:80/;stream.mp3',
 		audioType: 'audio/mp3'
 	},
 	Rock: {
@@ -142,7 +142,7 @@ function setRadioSelection(audioElement, radio) {
 			$('#cultRecords').fadeTo(0, 0.33);
 			$('#radioEksen').fadeTo(0, 1);
 
-			if (audioElement.src !== Stations.Eksen.url) {
+			if (audioElement.src.indexOf('radyotvonline') === -1) {
 				audioElement.src = Stations.Eksen.url;
 				audioElement.type = Stations.Eksen.audioType;
 			}
@@ -203,7 +203,7 @@ function setRadioSelection(audioElement, radio) {
 			$('#cultRecords').fadeTo(0, 0.33);
 			$('#radioEksen').fadeTo(0, 1);
 
-			if (audioElement.src !== Stations.Eksen.url) {
+			if (audioElement.src.indexOf('radyotvonline') === -1) {
 				audioElement.src = Stations.Eksen.url;
 				audioElement.type = Stations.Eksen.audioType;
 			}
