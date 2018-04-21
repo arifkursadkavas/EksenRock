@@ -8,7 +8,7 @@ var Constants = {
 
 var Stations = {
 	Eksen: {
-		url: 'http://eksenwmp.radyotvonline.com:80/;stream.mp3',
+		url: 'http://eksenwmp.radyotvonline.com/;stream.mp3',
 		audioType: 'audio/mp3'
 	},
 	Rock: {
@@ -142,9 +142,9 @@ function setRadioSelection(audioElement, radio) {
 			$('#cultRecords').fadeTo(0, 0.33);
 			$('#radioEksen').fadeTo(0, 1);
 
-			if (audioElement.src !== Constants.eksenURL) {
-				audioElement.src = Constants.eksenURL;
-				audioElement.type = Constants.audioTypeMP3;
+			if (audioElement.src !== Stations.Eksen.url) {
+				audioElement.src = Stations.Eksen.url;
+				audioElement.type = Stations.Eksen.audioType;
 			}
 
 			setEksenCurrentSong();
@@ -162,9 +162,9 @@ function setRadioSelection(audioElement, radio) {
 			$('#cultRecords').fadeTo(0, 0.33);
 			$('#rockFM').fadeTo(0, 1);
 
-			if (audioElement.src !== Constants.rockURL) {
-				audioElement.src = Constants.rockURL;
-				audioElement.type = Constants.audioTypeMP3;
+			if (audioElement.src !== Stations.Rock.url) {
+				audioElement.src = Stations.Rock.url;
+				audioElement.type = Stations.Rock.audioType;
 			}
 
 			clearSongInfo();
@@ -183,9 +183,9 @@ function setRadioSelection(audioElement, radio) {
 			$('#rockFM').fadeTo(0, 0.33);
 			$('#cultRecords').fadeTo(0, 1);
 
-			if (audioElement.src !== Constants.cultURL) {
-				audioElement.src = Constants.cultURL;
-				audioElement.type = Constants.audioTypeMPEG;
+			if (audioElement.src !== Stations.Cult.url) {
+				audioElement.src = Stations.Cult.url;
+				audioElement.type = Stations.Cult.audioType;
 			}
 
 			setCultCurrentSong();
@@ -202,10 +202,12 @@ function setRadioSelection(audioElement, radio) {
 			$('#rockFM').fadeTo(0, 0.33);
 			$('#cultRecords').fadeTo(0, 0.33);
 			$('#radioEksen').fadeTo(0, 1);
-			if (audioElement.src !== Constants.eksenURL) {
-				audioElement.src = Constants.eksenURL;
-				audioElement.type = Constants.audioTypeMP3;
+
+			if (audioElement.src !== Stations.Eksen.url) {
+				audioElement.src = Stations.Eksen.url;
+				audioElement.type = Stations.Eksen.audioType;
 			}
+
 			setEksenCurrentSong();
 			chrome.browserAction.setIcon({
 				path: {
@@ -237,6 +239,12 @@ function setEksenCurrentSong() {
 		} else {
 			$('#albumCover').attr('src', 'img/eksen.png');
 		}
+
+		// if (data && data.track && data.track.wiki && data.track.wiki.content) {
+		// 	$('#infoText')[0].innerHTML = data.track.wiki.content;
+		// } else {
+		// 	$('#infoText')[0].innerHTML = 'Radyo Eksen';
+		// }
 	};
 
 	var callback = function (data) {

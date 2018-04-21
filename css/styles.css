@@ -143,3 +143,7 @@ body {
     top: 186px;
     cursor: pointer;
 }
+
+#infoText {
+    margin-top: 30px;
+}
