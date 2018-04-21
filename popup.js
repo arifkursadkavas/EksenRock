@@ -1,11 +1,3 @@
-var Constants = {
-	eksenURL: 'http://eksenwmp.radyotvonline.com/;stream.mp3',
-	rockURL: 'http://rockfm.rockfm.com.tr:9450/;stream.mp3',
-	cultURL: 'https://streaming.radio.co/sefac315e7/listen',
-	audioTypeMP3: 'audio/mp3',
-	audioTypeMPEG: 'audio/mpeg'
-};
-
 var Stations = {
 	Eksen: {
 		url: 'http://eksenwmp.radyotvonline.com:80/;stream.mp3',
@@ -311,6 +303,15 @@ function setUISlider(value) {
 
 document.addEventListener('DOMContentLoaded', function () {
 	Radio.onLoad();
+	setInterval(function () {
+		var playingRadio = localStorage.getItem('playingRadio');
+		if (playingRadio === 'eksen') {
+			setEksenCurrentSong();
+		}
+		if (playingRadio === 'cultRecords') {
+			setCultCurrentSong();
+		}
+	}, 10000);
 });
 
 (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments); }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m); })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
