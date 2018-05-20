@@ -53,7 +53,7 @@ body {
     cursor: pointer;
 }
 
-#radioEksen {
+#eksen {
     position: absolute;
     top: 48px;
     right: 184px;
@@ -63,7 +63,7 @@ body {
     border-radius:4px;
 }
 
-#rockFM {
+#rock {
     position: absolute;
     top: 89px;
     right: 200px;
@@ -73,7 +73,7 @@ body {
     border-radius: 4px;
 }
 
-#cultRecords {
+#cult {
     position: absolute;
     top: 130px;
     right: 200px;

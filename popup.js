@@ -13,10 +13,21 @@ var Stations = {
 	}
 };
 
+var State = {
+	currentRadio: '', // eksen / rock / cult
+	isPlaying: '',	  // true -> playing, false -> muted
+	currentVolume: '', // 0......1
+
+}
+
+var RadioList = ['eksen', 'rock', 'cult'];
+
 var Radio = {
 	onLoad: function () {
 
-		onPopSetUI();
+
+		var playingRadio = localStorage.getItem('playingRadio');
+		setUI(playingRadio);
 
 		var bgPage = chrome.extension.getBackgroundPage();
 		var audioElement = bgPage.player;
@@ -43,27 +54,24 @@ var Radio = {
 
 		setUISlider(volume);
 
-
-		var playingRadio = localStorage.getItem('playingRadio');
-
 		setRadioSelection(audioElement, playingRadio);
 
-		$('#radioEksen').click(function () {
+		$('#eksen').click(function () {
 			if (localStorage.getItem('playingRadio') != 'eksen')
 				setRadioSelection(audioElement, 'eksen');
 		});
 
-		$('#rockFM').click(function () {
+		$('#rock').click(function () {
 			if (localStorage.getItem('playingRadio') != 'rock')
 				setRadioSelection(audioElement, 'rock');
 		});
 
-		$('#cultRecords').click(function () {
-			if (localStorage.getItem('playingRadio') != 'cultRecords')
-				setRadioSelection(audioElement, 'cultRecords');
+		$('#cult').click(function () {
+			if (localStorage.getItem('playingRadio') != 'cult')
+				setRadioSelection(audioElement, 'cult');
 		});
 
-		if (audioElement.paused) {
+		if (audioElement.muted) {
 			$('#playImage').attr('src', 'img/play.png');
 			$('#albumCover').css('-webkit-animation', '');
 		} else {
@@ -114,10 +122,11 @@ function play(play) {
 	var audioElement = bgPage.player;
 	if (play) {
 		audioElement.play();
+		audioElement.muted = false;
 		$('#albumCover').css('-webkit-animation', 'rotation 4s infinite linear');
 		ga('send', 'event', 'play', localStorage.getItem('playingRadio'), Date.now());
 	} else {
-		audioElement.pause();
+		audioElement.muted = true;
 		$('#albumCover').css('-webkit-animation', '');
 		ga('send', 'event', 'pause', localStorage.getItem('playingRadio'), Date.now());
 	}
@@ -127,19 +136,17 @@ function setRadioSelection(audioElement, radio) {
 
 	var isPlaying = localStorage.getItem('isPlaying');
 
+	setUI(radio);
+	setCurrentSong(radio);
+
 	switch (radio) {
 		case 'eksen':
-
-			$('#rockFM').fadeTo(0, 0.33);
-			$('#cultRecords').fadeTo(0, 0.33);
-			$('#radioEksen').fadeTo(0, 1);
 
 			if (audioElement.src.indexOf('radyotvonline') === -1) {
 				audioElement.src = Stations.Eksen.url;
 				audioElement.type = Stations.Eksen.audioType;
 			}
 
-			setEksenCurrentSong();
 			chrome.browserAction.setIcon({
 				path: {
 					'19': 'img/eksen_icon.png',
@@ -150,16 +157,12 @@ function setRadioSelection(audioElement, radio) {
 			break;
 
 		case 'rock':
-			$('#radioEksen').fadeTo(0, 0.33);
-			$('#cultRecords').fadeTo(0, 0.33);
-			$('#rockFM').fadeTo(0, 1);
 
 			if (audioElement.src !== Stations.Rock.url) {
 				audioElement.src = Stations.Rock.url;
 				audioElement.type = Stations.Rock.audioType;
 			}
 
-			clearSongInfo();
 			chrome.browserAction.setIcon({
 				path: {
 					'19': 'img/rock_icon.png',
@@ -170,17 +173,12 @@ function setRadioSelection(audioElement, radio) {
 			$('#albumCover').attr('src', 'img/rock.png');
 			break;
 
-		case 'cultRecords':
-			$('#radioEksen').fadeTo(0, 0.33);
-			$('#rockFM').fadeTo(0, 0.33);
-			$('#cultRecords').fadeTo(0, 1);
+		case 'cult':
 
 			if (audioElement.src !== Stations.Cult.url) {
 				audioElement.src = Stations.Cult.url;
 				audioElement.type = Stations.Cult.audioType;
 			}
-
-			setCultCurrentSong();
 			chrome.browserAction.setIcon({
 				path: {
 					'19': 'img/cult_icon.png',
@@ -191,9 +189,6 @@ function setRadioSelection(audioElement, radio) {
 			break;
 
 		default:
-			$('#rockFM').fadeTo(0, 0.33);
-			$('#cultRecords').fadeTo(0, 0.33);
-			$('#radioEksen').fadeTo(0, 1);
 
 			if (audioElement.src.indexOf('radyotvonline') === -1) {
 				audioElement.src = Stations.Eksen.url;
@@ -263,27 +258,35 @@ function setCultCurrentSong() {
 	$.get(url, null, callback, null);
 }
 
-function clearSongInfo() {
-	$('#songName').text('Rock FM');
-	$('#bandName').text('Rock FM');
+function setCurrentSong(radio) {
+	switch (radio) {
+		case 'eksen':
+			setEksenCurrentSong();
+			break;
+		case 'cult':
+			setCultCurrentSong();
+			break;
+		default:
+			clearSongInfo();
+	}
 }
 
-function onPopSetUI() {
-	var playingRadio = localStorage.getItem('playingRadio');
+function clearSongInfo() {
+	$('#songName').text('');
+	$('#bandName').text('');
+}
 
-	if (playingRadio == 'rock') {
-		$('#radioEksen').fadeTo(0, 0.33);
-		$('#cultRecords').fadeTo(0, 0.33);
-		clearSongInfo();
-	} else if (playingRadio == 'eksen') {
-		$('#rock').fadeTo(0, 0.33);
-		$('#cultRecords').fadeTo(0, 0.33);
-		setEksenCurrentSong();
-	} else if (playingRadio == 'cultRecords') {
-		$('#rock').fadeTo(0, 0.33);
-		$('#radioEksen').fadeTo(0, 0.33);
-		setCultCurrentSong();
-	}
+function setUI(playingRadio) {
+
+	$('#' + playingRadio).fadeTo(0, 1);
+	console.log(playingRadio);
+
+	RadioList.filter(function (s) {
+		return s !== playingRadio;
+	}).forEach(function (s) {
+		$('#' + s).fadeTo(0, 0.33);
+	});
+	setCurrentSong(playingRadio);
 }
 
 function setVolume(myVolume, store) {
@@ -308,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (playingRadio === 'eksen') {
 			setEksenCurrentSong();
 		}
-		if (playingRadio === 'cultRecords') {
+		if (playingRadio === 'cult') {
 			setCultCurrentSong();
 		}
 	}, 10000);
