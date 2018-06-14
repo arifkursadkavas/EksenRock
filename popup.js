@@ -71,7 +71,7 @@ var Radio = {
 				setRadioSelection(audioElement, 'cult');
 		});
 
-		if (audioElement.muted) {
+		if (audioElement.muted || audioElement.paused) {
 			$('#playImage').attr('src', 'img/play.png');
 			$('#albumCover').css('-webkit-animation', '');
 		} else {
