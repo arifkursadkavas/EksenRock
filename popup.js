@@ -121,6 +121,7 @@ function play(play) {
 	var bgPage = chrome.extension.getBackgroundPage();
 	var audioElement = bgPage.player;
 	if (play) {
+		setRadioSelection(audioElement, localStorage.getItem('playingRadio'));
 		audioElement.play();
 		audioElement.muted = false;
 		$('#albumCover').css('-webkit-animation', 'rotation 4s infinite linear');
